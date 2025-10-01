@@ -26,6 +26,7 @@ public class InventoryPage extends BasePage
     public AltObject precisionTxt;
     public AltObject speedTxt;
     public AltObject chancesTxt;
+    public AltObject rarityTxt;
 
     public AltObject powerValue;
     public AltObject speedValue;
@@ -89,6 +90,13 @@ public class InventoryPage extends BasePage
         AltFindObjectsParams cardPieces = new AltFindObjectsParams.Builder(AltDriver.By.PATH, "/Canvas/InventoryPopUp/Content/PlayerCard(Clone)/Pieces").build();
         pieces = getDriver().findObject(cardPieces);
         return pieces;
+    }
+
+    public AltObject getRarityText()
+    {
+        AltFindObjectsParams rarity = new AltFindObjectsParams.Builder(AltDriver.By.PATH, "/Canvas/Inventory/CardCollectionPanel/Scroll View/Viewport/Content/PlayerCard(Clone)/RarityTxt").build();
+        rarityTxt = getDriver().findObject(rarity);
+        return rarityTxt;
     }
 
     public AltObject getPiecesRequired()
