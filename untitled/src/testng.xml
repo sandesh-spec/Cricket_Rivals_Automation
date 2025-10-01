@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Smoke-UI-Tests">
+    <test name="TestGroup1">
+        <classes>
+            <class name="HomeScreenTest"/>
+            <class name="InventoryScreenTest"/>
+<!--            <class name=""/>-->
+        </classes>
+    </test>
+</suite>

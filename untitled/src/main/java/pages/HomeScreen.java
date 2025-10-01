@@ -22,6 +22,10 @@ public class HomeScreen extends BasePage {
     public String sceneName;
     public AltObject rewardScreenObject;
     public AltObject fillCountObject;
+    public AltObject rewardCountObj;
+    public AltObject milestoneChestHomeCollectButton;
+    public AltObject milestoneChestBgObj;
+    public AltObject milestoneChestClaimButton;
 
     public HomeScreen(AltDriver driver) {
         super(driver);
@@ -118,6 +122,27 @@ public class HomeScreen extends BasePage {
         return rewardScreenObject;
     }
 
+    public AltObject getMilestoneChestHomeCollectButton()
+    {
+        AltFindObjectsParams milestoneChestHome = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "MilestoneChestPopUp").build();
+        milestoneChestHomeCollectButton = getDriver().findObject(milestoneChestHome);
+        return milestoneChestHomeCollectButton;
+    }
+
+    public AltObject getMilestoneChestBgObj()
+    {
+        AltFindObjectsParams milestoneBGObj = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "MilestonechestBg").build();
+        milestoneChestBgObj = getDriver().findObject(milestoneBGObj);
+        return milestoneChestBgObj;
+    }
+
+    public AltObject getMilestoneChestClaimButton()
+    {
+        AltFindObjectsParams milestoneClaimButton = new AltFindObjectsParams.Builder(AltDriver.By.PATH, "/Canvas/TokenChestPopUp/MilestonechestBg/OpenBtn").build();
+        milestoneChestClaimButton = getDriver().findObject(milestoneClaimButton);
+        return milestoneChestClaimButton;
+    }
+
     public boolean isHomeScreenLoaded()
     {
         String currentSceneName = getSceneName();
@@ -125,11 +150,25 @@ public class HomeScreen extends BasePage {
         return sceneName.equals(currentSceneName);
     }
 
+    public AltObject rewardCount()
+    {
+        AltFindObjectsParams rewardObj = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "RemainingCountTxt").build();
+        rewardCountObj = getDriver().findObject(rewardObj);
+        return rewardCountObj;
+    }
+
+    public int countForChestRewardTaps()
+    {
+        String rewardCount = rewardCount().getText().replaceAll("[^\\d]", "");
+        return Integer.parseInt(rewardCount);
+    }
+
     public boolean isPlayTextDisplayed()
     {
         return playButton != null && playText != null;
     }
 
+ //region Action Methods
     public void tapShopTab()
     {
         shopTab.tap();
@@ -164,4 +203,5 @@ public class HomeScreen extends BasePage {
     {
         backButtonChestPopUp.tap();
     }
+//endregion
 }

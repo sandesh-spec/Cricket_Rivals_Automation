@@ -14,17 +14,33 @@ public class InventoryPage extends BasePage
     public AltObject CharacterSelectionUI;
     public AltObject UIScrollButton;
     public AltObject playerCard;
+    public AltObject playerCard1;
 
-    public AltObject inventoryPopUpObject;
+    public AltObject pieces;
+    public AltObject piecesRequired;
+    public AltObject inventoryObject;
     public AltObject equipButton;
     public AltObject upgradeButton;
-    public AltObject powerStat;
-    public AltObject precisionStat;
-    public AltObject speedStat;
-    public AltObject chancesStat;
+    public AltObject upgradeCostText;
+    public AltObject powerTxt;
+    public AltObject precisionTxt;
+    public AltObject speedTxt;
+    public AltObject chancesTxt;
+
+    public AltObject powerValue;
+    public AltObject speedValue;
+    public AltObject chancesValue;
+    public AltObject precisionValue;
+
     public AltObject inventoryPopUpCloseButton;
 
+    public AltObject topUICoinsText;
+
     public AltObject cardCollectionPanelObject;
+
+    public AltObject playerCardPopUp;
+
+    public AltObject nameText;
 
     public AltObject getBatSelectionUI()
     {
@@ -37,7 +53,7 @@ public class InventoryPage extends BasePage
     {
         AltFindObjectsParams character = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "CharacterBtn").build();
         CharacterSelectionUI = getDriver().findObject(character);
-        return BatSelectionUI;
+        return CharacterSelectionUI;
     }
 
     public AltObject getUIScrollButton()
@@ -47,11 +63,18 @@ public class InventoryPage extends BasePage
         return UIScrollButton;
     }
 
+    public AltObject getNameText()
+    {
+        AltFindObjectsParams name = new AltFindObjectsParams.Builder(AltDriver.By.PATH, "/Canvas/Inventory/CardCollectionPanel/Scroll View/Viewport/Content/PlayerCard(Clone)/NameTxt").build();
+        nameText = getDriver().findObject(name);
+        return nameText;
+    }
+
     public AltObject getInventoryPopUpObject()
     {
         AltFindObjectsParams inventory = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "Inventory").build();
-        inventoryPopUpObject = getDriver().findObject(inventory);
-        return inventoryPopUpObject;
+        inventoryObject = getDriver().findObject(inventory);
+        return inventoryObject;
     }
 
     public AltObject getPlayerCard()
@@ -59,6 +82,34 @@ public class InventoryPage extends BasePage
         AltFindObjectsParams card = new AltFindObjectsParams.Builder(AltDriver.By.PATH, "/Canvas/Inventory/CardCollectionPanel/Scroll View/Viewport/Content/PlayerCard(Clone)").build();
         playerCard = getDriver().findObject(card);
         return playerCard;
+    }
+
+    public AltObject getPieces()
+    {
+        AltFindObjectsParams cardPieces = new AltFindObjectsParams.Builder(AltDriver.By.PATH, "/Canvas/InventoryPopUp/Content/PlayerCard(Clone)/Pieces").build();
+        pieces = getDriver().findObject(cardPieces);
+        return pieces;
+    }
+
+    public AltObject getPiecesRequired()
+    {
+        AltFindObjectsParams cardPiecesReq = new AltFindObjectsParams.Builder(AltDriver.By.PATH, "/Canvas/InventoryPopUp/Content/PlayerCard(Clone)/PiecesRequired").build();
+        piecesRequired = getDriver().findObject(cardPiecesReq);
+        return piecesRequired;
+    }
+
+    public AltObject getPlayerCardPopUp()
+    {
+        AltFindObjectsParams cardPopUp = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "InventoryPopUp").build();
+        playerCardPopUp = getDriver().findObject(cardPopUp);
+        return playerCardPopUp;
+    }
+
+    public AltObject getTopUICoinsText()
+    {
+        AltFindObjectsParams ownedCoins = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "CoinsText").build();
+        topUICoinsText = getDriver().findObject(ownedCoins);
+        return topUICoinsText;
     }
 
     public AltObject getEquipButton()
@@ -75,32 +126,67 @@ public class InventoryPage extends BasePage
         return upgradeButton;
     }
 
-    public AltObject getPowerStat()
+    public AltObject getUpgradeCostText()
+    {
+        AltFindObjectsParams upgradeCost = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "UpgradeCostTxt").build();
+        upgradeCostText = getDriver().findObject(upgradeCost);
+        return upgradeCostText;
+    }
+
+    public AltObject getPowerTxt()
     {
         AltFindObjectsParams power = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "Stat1_Txt").build();
-        powerStat = getDriver().findObject(power);
-        return powerStat;
+        powerTxt = getDriver().findObject(power);
+        return powerTxt;
     }
 
-    public AltObject getPrecisionStat()
+    public AltObject getPrecisionTxt()
     {
         AltFindObjectsParams precision = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "Stat2_Txt").build();
-        precisionStat = getDriver().findObject(precision);
-        return precisionStat;
+        precisionTxt = getDriver().findObject(precision);
+        return precisionTxt;
     }
 
-    public AltObject getSpeedStat()
+    public AltObject getSpeedTxt()
     {
         AltFindObjectsParams speed = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "Stat3_Txt").build();
-        speedStat = getDriver().findObject(speed);
-        return speedStat;
+        speedTxt = getDriver().findObject(speed);
+        return speedTxt;
     }
 
-    public AltObject getChancesStat()
+    public AltObject getChancesTxt()
     {
-        AltFindObjectsParams speed = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "Stat3_Txt").build();
-        speedStat = getDriver().findObject(speed);
-        return speedStat;
+        AltFindObjectsParams chances = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "Stat3_Txt").build();
+        chancesTxt = getDriver().findObject(chances);
+        return chancesTxt;
+    }
+
+    public AltObject getPowerValue()
+    {
+        AltFindObjectsParams power = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "Power_Txt").build();
+        powerValue = getDriver().findObject(power);
+        return powerValue;
+    }
+
+    public AltObject getPrecisionValue()
+    {
+        AltFindObjectsParams precision = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "Precesion_Txt").build();
+        precisionValue = getDriver().findObject(precision);
+        return precisionValue;
+    }
+
+    public AltObject getSpeedValue()
+    {
+        AltFindObjectsParams speed = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "Speed_Txt").build();
+        speedValue = getDriver().findObject(speed);
+        return speedValue;
+    }
+
+    public AltObject getChancesValue()
+    {
+        AltFindObjectsParams chances = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "Chances_Txt").build();
+        chancesValue = getDriver().findObject(chances);
+        return chancesValue;
     }
 
     public AltObject getInventoryPopUpCloseButton()

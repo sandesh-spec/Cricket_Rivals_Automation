@@ -18,7 +18,7 @@ public class HomeScreenTest extends BaseTest
     private HomeScreen homeScreen;
     SoftAssert softAssert = new SoftAssert();
 
-
+ //region StartUp&TearDown
     @BeforeClass
     public void setUp() throws IOException
     {
@@ -32,9 +32,13 @@ public class HomeScreenTest extends BaseTest
     public void tearDown() throws Exception
     {
         System.out.println("Homescreen teardown");
+        altDriver.stop();
         Thread.sleep(1000);
     }
+//endregion
 
+
+ //region Tests
     @Test(priority = 0)
     public void testHomeScreenLoaded()
     {
@@ -123,44 +127,84 @@ public class HomeScreenTest extends BaseTest
     }
 
     @Test(priority = 10)
-    public void testOpenChestButtonIsTappable()
-    {
+    public void testOpenChestButtonIsTappable() throws InterruptedException {
         AltObject fillCountObj = homeScreen.getFillCountObject();
         String count = fillCountObj.getText().split("/")[0];
         int ownedToken = Integer.parseInt(count);
         System.out.println("Owned Token: "+ownedToken);
-        if(ownedToken >= 30)
+        if(ownedToken >= 30 && homeScreen.milestoneChestHomeCollectButton == null)
         {
             AltObject openChestButton = homeScreen.getOpenChestButton();
             openChestButton.tap();
             AltObject rewardScreen = homeScreen.getRewardScreenObject();
             Assert.assertTrue(rewardScreen.isEnabled());
+            int numberOfRewards = homeScreen.countForChestRewardTaps();
+            AltObject reward = homeScreen.rewardCount();
+            for(int i=0; i<numberOfRewards+2; i++)
+            {
+                reward.tap();
+                Thread.sleep(1000);
+            }
+            AltObject backButton = homeScreen.getBackButtonChestPopUp();
+            backButton.tap();
         }
         else
         {
-            throw new SkipException("Skipping test because ownedTokens are less than 30");
+            throw new SkipException("Skipping test because ownedTokens are less than 30 or MileStone chest is collectable");
         }
     }
 
-//    @Test(priority = 11)
-//    public void testOpenChestButtonIsNotTappable()
-//    {
-//        AltObject fillCountObj = homeScreen.getFillCountObject();
-//        String count = fillCountObj.getText().split("/")[0];
-//        int ownedToken = Integer.parseInt(count);
-//        System.out.println("Owned Token: "+ownedToken);
-//        if(ownedToken < 30)
-//        {
-//            AltObject openChestButton = homeScreen.getOpenChestButton();
-//            openChestButton.tap();
-//            AltObject backButton = homeScreen.getBackButtonChestPopUp();
-//            Assert.assertTrue(backButton.isEnabled());
-//        }
-//        else
-//        {
-//            AltObject backButton = homeScreen.getBackButtonChestPopUp();
-//            homeScreen.tapBackButtonForChestPopUp();
-//            throw new SkipException("Skipping test because ownedTokens are greater than 30");
-//        }
-//    }
+    @Test(priority = 11)
+    public void testIfMileStoneIsClaimable() throws InterruptedException {
+        AltObject OpenChest = homeScreen.getClaimButton();
+        AltObject milestoneChestButtonHome = homeScreen.getMilestoneChestHomeCollectButton();
+        if(milestoneChestButtonHome != null)
+        {
+            Assert.assertTrue(homeScreen.milestoneChestHomeCollectButton.isEnabled());
+            homeScreen.milestoneChestHomeCollectButton.tap();
+            Assert.assertTrue(homeScreen.getMilestoneChestBgObj().isEnabled());
+            AltFindObjectsParams findParams = new AltFindObjectsParams.Builder(AltDriver.By.NAME, "OpenBtn").build();
+            AltWaitForObjectsParams waitParams = new AltWaitForObjectsParams.Builder(findParams).build();
+            altDriver.waitForObject(waitParams);
+            AltObject claimButton = homeScreen.getMilestoneChestClaimButton();
+            claimButton.tap();
+            Thread.sleep(1000);
+            int numberOfRewards = homeScreen.countForChestRewardTaps();
+            AltObject reward = homeScreen.rewardCount();
+            for(int i=0; i<numberOfRewards+2; i++)
+            {
+                reward.tap();
+                Thread.sleep(1000);
+            }
+            AltObject backButton = homeScreen.getBackButtonChestPopUp();
+            backButton.tap();
+        }
+        else
+        {
+            throw new SkipException("MileStone is not claimable yet");
+        }
+    }
+
+    @Test(priority = 12)
+    public void testOpenChestButtonIsNotTappable()
+    {
+        homeScreen.tapClaimButton();
+        AltObject fillCountObj = homeScreen.getFillCountObject();
+        String count = fillCountObj.getText().split("/")[0];
+        int ownedToken = Integer.parseInt(count);
+        System.out.println("Owned Token: "+ownedToken);
+        if(ownedToken < 30)
+        {
+            AltObject openChestButton = homeScreen.getOpenChestButton();
+            AltObject backButton = homeScreen.getBackButtonChestPopUp();
+            Assert.assertTrue(backButton.isEnabled());
+            homeScreen.tapBackButtonForChestPopUp();
+        }
+        else
+        {
+            throw new SkipException("Skipping test because ownedTokens are greater than 30 or Milestone chest is in collectable state");
+        }
+    }
+
+//endregion
 }
