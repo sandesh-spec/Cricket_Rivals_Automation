@@ -1,3 +1,5 @@
+package GameUITests;
+
 import com.alttester.AltDriver;
 import com.alttester.AltObject;
 import com.alttester.Commands.FindObject.AltFindObjectsParams;
@@ -22,10 +24,10 @@ public class HomeScreenTest extends BaseTest
     @BeforeClass
     public void setUp() throws IOException
     {
-        // Code is in BaseTest
+        // Code is in GameUITests.BaseTest
         altDriver = new AltDriver("127.0.0.1", 13000);
         homeScreen = new HomeScreen(altDriver);
-        System.out.println("HomeScreenTest setup");
+        System.out.println("GameUITests.HomeScreenTest setup");
     }
 
     @AfterClass

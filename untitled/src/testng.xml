@@ -2,8 +2,8 @@
 <suite name="Smoke-UI-Tests">
     <test name="TestGroup1">
         <classes>
-            <class name="HomeScreenTest"/>
-            <class name="InventoryScreenTest"/>
+            <class name="GameUITests.HomeScreenTest"/>
+            <class name="GameUITests.InventoryScreenTest"/>
 <!--            <class name=""/>-->
         </classes>
     </test>

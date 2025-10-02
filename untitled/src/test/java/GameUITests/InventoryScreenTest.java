@@ -1,3 +1,5 @@
+package GameUITests;
+
 import Mapper.PlayerMapper;
 import Pojo.PlayerCard;
 import Utilities.Utility;
@@ -15,7 +17,6 @@ import pages.HomeScreen;
 import pages.InventoryPage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class InventoryScreenTest extends BaseTest{
     private AltDriver altDriver;
@@ -30,7 +31,7 @@ public class InventoryScreenTest extends BaseTest{
     @BeforeClass
     public void setUp() throws IOException
     {
-        // Code is in BaseTest
+        // Code is in GameUITests.BaseTest
         altDriver = new AltDriver();
         inventoryPage = new InventoryPage(altDriver);
         homeScreen = new HomeScreen(altDriver);

@@ -1,14 +1,9 @@
+package GameUITests;
+
 import com.alttester.AltDriver;
-import com.alttester.AltObject;
 import com.alttester.AltReversePortForwarding;
-import com.alttester.Commands.FindObject.AltFindObjectsParams;
-import com.alttester.Commands.FindObject.AltWaitForObjectsParams;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 
 import java.io.IOException;
 
@@ -21,14 +16,14 @@ public class BaseTest {
     {
         AltReversePortForwarding.reversePortForwardingAndroid();
         altDriver = new AltDriver("127.0.0.1", 13000);
-        System.out.println("BaseTest setup");
+        System.out.println("GameUITests.BaseTest setup");
     }
 
     @AfterClass
     public void tearDown() throws Exception {
 
         altDriver.stop();
-        System.out.print("BaseTest tearDown");
+        System.out.print("GameUITests.BaseTest tearDown");
         AltReversePortForwarding.removeReversePortForwardingAndroid();
     }
 
