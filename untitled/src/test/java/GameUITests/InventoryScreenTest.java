@@ -7,7 +7,7 @@ import com.alttester.AltDriver;
 import com.alttester.AltObject;
 import com.alttester.Commands.FindObject.AltFindObjectsParams;
 import com.alttester.Commands.FindObject.AltWaitForObjectsParams;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -134,7 +134,7 @@ public class InventoryScreenTest extends BaseTest{
         AltObject objectModified = inventoryPage.getCardCollectionPanel();
         float modifiedPosY = objectModified.getWorldY();
 
-        Assert.assertTrue("CardSelection Panel has moved Up", modifiedPosY > initialPosY);
+        Assert.assertTrue(modifiedPosY > initialPosY,"CardSelection Panel has moved Up" );
 
     }
 
@@ -150,7 +150,7 @@ public class InventoryScreenTest extends BaseTest{
         AltObject objectModified = inventoryPage.getCardCollectionPanel();
         float modifiedPosY = objectModified.getWorldY();
 
-        Assert.assertTrue("CardSelection Panel has moved Down", initialPosY > modifiedPosY);
+        Assert.assertTrue(modifiedPosY > initialPosY,"CardSelection Panel has moved Down");
     }
 
     @Test(priority = 8)
